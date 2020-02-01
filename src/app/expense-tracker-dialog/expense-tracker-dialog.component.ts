@@ -29,7 +29,22 @@ export class ExpenseTrackerDialogComponent implements OnInit {
     });
   }
 
+  getTotal() {
+    return (
+      this.expenseForm.controls["cost"].value *
+      this.expenseForm.controls["quantity"].value
+    );
+  }
+
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onValidateNumeric(event): boolean {
+    const restrictedKeyCodes = [43, 45, 69, 101];
+    if (restrictedKeyCodes.includes(event.keyCode)) {
+      return false;
+    }
+    return true;
   }
 }

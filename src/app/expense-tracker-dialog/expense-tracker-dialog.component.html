@@ -3,31 +3,34 @@
   <form [formGroup]="expenseForm" novalidate>
     <div class="cost-container">
       <mat-form-field>
-        <mat-label>Quantity</mat-label>
-        <input
-          matInput
-          type="number"
-          formControlName="quantity"
-          onkeydown="javascript: return event.keyCode == 69 ? false : true"
-          required
-        />
-      </mat-form-field>
-
-      <mat-form-field>
         <mat-label>Cost</mat-label>
         <span matPrefix>$&nbsp;</span>
         <input
           matInput
           type="number"
           formControlName="cost"
-          onkeydown="javascript: return event.keyCode == 69 ? false : true"
+          (keypress)="onValidateNumeric($event)"
+          min="0"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="quantity"
+          (keypress)="onValidateNumeric($event)"
+          min="0"
           required
         />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Total</mat-label>
-        <input matInput [readonly]="true" />
+        <span matPrefix>$&nbsp;</span>
+        <input matInput [value]="getTotal()" [readonly]="true" />
       </mat-form-field>
     </div>
 
@@ -44,12 +47,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button
-    mat-button
-    [mat-dialog-close]=""
-    [disabled]="!expenseForm.valid"
-    cdkFocusInitial
-  >
+  <button mat-button [mat-dialog-close]="" [disabled]="!expenseForm.valid">
     Submit
   </button>
 </div>
