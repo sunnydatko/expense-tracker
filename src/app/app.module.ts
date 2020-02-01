@@ -1,10 +1,15 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatButtonModule, MatDialogModule } from "@angular/material";
+import {
+  MatButtonModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule
+} from "@angular/material";
 
 import { AppComponent } from "./app.component";
-import { ExpenseTrackerDialogComponent } from './expense-tracker-dialog/expense-tracker-dialog.component';
+import { ExpenseTrackerDialogComponent } from "./expense-tracker-dialog/expense-tracker-dialog.component";
 
 @NgModule({
   declarations: [AppComponent, ExpenseTrackerDialogComponent],
@@ -14,11 +19,10 @@ import { ExpenseTrackerDialogComponent } from './expense-tracker-dialog/expense-
     // angular material
     MatButtonModule,
     MatDialogModule,
-
+    MatFormFieldModule,
+    MatInputModule,
   ],
-  entryComponents: [
-    ExpenseTrackerDialogComponent,
-  ],
+  entryComponents: [ExpenseTrackerDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -19,7 +19,7 @@ export class AppComponent {
 
   openExpenseTrackerDialog(): void {
     const dialogRef = this.dialog.open(ExpenseTrackerDialogComponent, {
-      width: "550px",
+      width: "750px",
       data: {  }
     });
 
