@@ -1,6 +1,8 @@
-import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 import {
   MatButtonModule,
   MatDialogModule,
@@ -16,6 +18,8 @@ import { ExpenseTrackerDialogComponent } from "./expense-tracker-dialog/expense-
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+
     // angular material
     MatButtonModule,
     MatDialogModule,

@@ -1,8 +1,21 @@
-.example-container {
+.cost-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+
+  mat-form-field {
+      padding: 7px;
+  }
 }
 
-.example-container > * {
-  width: 100%;
+.description {
+    padding: 7px;
+    width: 590px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
 }
