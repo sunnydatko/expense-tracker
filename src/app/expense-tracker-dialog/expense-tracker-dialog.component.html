@@ -21,7 +21,7 @@
           matInput
           type="number"
           formControlName="quantity"
-          (keypress)="onValidateNumeric($event)"
+          (keypress)="onValidateNumericNoDecimal($event)"
           min="0"
           required
         />

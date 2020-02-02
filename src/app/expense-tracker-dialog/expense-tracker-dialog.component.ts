@@ -23,17 +23,19 @@ export class ExpenseTrackerDialogComponent implements OnInit {
 
   createForm() {
     this.expenseForm = this.fb.group({
-      cost: ["", Validators.required],
-      quantity: ["", Validators.required],
+      cost: ["", [Validators.required, Validators.min(0)]],
+      quantity: ["", [Validators.required, Validators.min(0)]],
       description: ["", Validators.required]
     });
   }
 
   getTotal() {
-    return (
+    let value = (
       this.expenseForm.controls["cost"].value *
       this.expenseForm.controls["quantity"].value
-    );
+    ).toFixed(2);
+
+    return Number(value).toLocaleString();
   }
 
   onCancel(): void {
@@ -41,10 +43,21 @@ export class ExpenseTrackerDialogComponent implements OnInit {
   }
 
   onValidateNumeric(event): boolean {
-    const restrictedKeyCodes = [43, 45, 69, 101];
-    if (restrictedKeyCodes.includes(event.keyCode)) {
-      return false;
+    if (event.keyCode == 46) {
+      return true;
     }
-    return true;
+
+    if (event.keyCode >= 48 && event.keyCode <= 57) {
+      return true;
+    }
+    return false;
+  }
+
+  onValidateNumericNoDecimal(event): boolean {
+    if (event.keyCode >= 48 && event.keyCode <= 57) {
+      return true;
+    }
+
+    return false;
   }
 }
