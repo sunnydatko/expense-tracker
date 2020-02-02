@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef } from "@angular/material/dialog";
+import { Store } from "@ngrx/store";
 
+import { addExpense } from "../actions/expense-tracker.actions";
 import { ExpenseData } from "../interfaces/expense.interface";
 
 @Component({
@@ -16,7 +18,7 @@ export class ExpenseTrackerDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<ExpenseTrackerDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: null
+    private store: Store<{ expenseList: ExpenseData[] }>
   ) {
     this.createForm();
   }
@@ -27,7 +29,7 @@ export class ExpenseTrackerDialogComponent implements OnInit {
     this.expenseForm = this.fb.group({
       cost: ["", [Validators.required, Validators.min(0)]],
       description: ["", Validators.required],
-      quantity: ["", [Validators.required, Validators.min(0)]],
+      quantity: ["", [Validators.required, Validators.min(0)]]
     });
   }
 
@@ -45,13 +47,14 @@ export class ExpenseTrackerDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let data = <ExpenseData>{
+    let expenseData = <ExpenseData>{
       cost: this.expenseForm.controls["cost"].value,
       description: this.expenseForm.controls["description"].value,
-      quantity: this.expenseForm.controls["description"].value,
+      quantity: this.expenseForm.controls["description"].value
     };
 
-    this.dialogRef.close({ event: "close", data: data });
+    this.store.dispatch(addExpense({ expenseData }));
+    this.dialogRef.close();
   }
 
   onValidateNumeric(event): boolean {
