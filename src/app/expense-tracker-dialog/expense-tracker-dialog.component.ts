@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
+import { ExpenseData } from "../interfaces/expense.interface";
+
 @Component({
   selector: "app-expense-tracker-dialog",
   templateUrl: "./expense-tracker-dialog.component.html",
@@ -24,8 +26,8 @@ export class ExpenseTrackerDialogComponent implements OnInit {
   createForm() {
     this.expenseForm = this.fb.group({
       cost: ["", [Validators.required, Validators.min(0)]],
+      description: ["", Validators.required],
       quantity: ["", [Validators.required, Validators.min(0)]],
-      description: ["", Validators.required]
     });
   }
 
@@ -40,6 +42,16 @@ export class ExpenseTrackerDialogComponent implements OnInit {
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onSubmit(): void {
+    let data = <ExpenseData>{
+      cost: this.expenseForm.controls["cost"].value,
+      description: this.expenseForm.controls["description"].value,
+      quantity: this.expenseForm.controls["description"].value,
+    };
+
+    this.dialogRef.close({ event: "close", data: data });
   }
 
   onValidateNumeric(event): boolean {

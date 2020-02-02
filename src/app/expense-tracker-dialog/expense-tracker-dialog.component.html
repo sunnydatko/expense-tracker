@@ -10,7 +10,6 @@
           type="number"
           formControlName="cost"
           (keypress)="onValidateNumeric($event)"
-          min="0"
           required
         />
       </mat-form-field>
@@ -47,7 +46,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button [mat-dialog-close]="" [disabled]="!expenseForm.valid">
+  <button mat-button (click)="onSubmit()" [disabled]="!expenseForm.valid">
     Submit
   </button>
 </div>

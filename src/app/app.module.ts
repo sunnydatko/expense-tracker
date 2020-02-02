@@ -7,14 +7,16 @@ import {
   MatButtonModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatTableModule,
 } from "@angular/material";
 
 import { AppComponent } from "./app.component";
 import { ExpenseTrackerDialogComponent } from "./expense-tracker-dialog/expense-tracker-dialog.component";
+import { ExpenseListComponent } from './expense-list/expense-list.component';
 
 @NgModule({
-  declarations: [AppComponent, ExpenseTrackerDialogComponent],
+  declarations: [AppComponent, ExpenseTrackerDialogComponent, ExpenseListComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -25,6 +27,7 @@ import { ExpenseTrackerDialogComponent } from "./expense-tracker-dialog/expense-
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTableModule,
   ],
   entryComponents: [ExpenseTrackerDialogComponent],
   providers: [],
