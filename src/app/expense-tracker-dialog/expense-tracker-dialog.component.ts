@@ -50,7 +50,7 @@ export class ExpenseTrackerDialogComponent implements OnInit {
     let expenseData = <ExpenseData>{
       cost: this.expenseForm.controls["cost"].value,
       description: this.expenseForm.controls["description"].value,
-      quantity: this.expenseForm.controls["description"].value
+      quantity: this.expenseForm.controls["quantity"].value
     };
 
     this.store.dispatch(addExpense({ expenseData }));

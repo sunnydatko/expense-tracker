@@ -1,10 +1,9 @@
-import { Component, OnInit, OnChanges } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { MatTableDataSource } from "@angular/material";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 
 import { ExpenseData } from "../interfaces/expense.interface";
-
-const EXPENSE_DATA: ExpenseData[] = [];
 
 @Component({
   selector: "app-expense-list",
@@ -12,17 +11,17 @@ const EXPENSE_DATA: ExpenseData[] = [];
   styleUrls: ["./expense-list.component.scss"]
 })
 export class ExpenseListComponent implements OnInit {
-  expenseList$: Observable<ExpenseData[]>;
-  dataSource = EXPENSE_DATA;
-  displayedColumns: string[] = ["cost", "description", "quantity", "total"];
+  expenses$: Observable<ExpenseData[]>;
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ["cost", "quantity", "description", "total"];
 
-  constructor(private store: Store<{ expenseList: ExpenseData[] }>) {
-    this.expenseList$ = store.pipe(select("expenseList"));
+  constructor(private store: Store<{ expenses: ExpenseData[] }>) {
+    this.expenses$ = store.pipe(select("expenses"));
   }
 
-  ngOnInit() {}
-
-  ngOnChanges() {
-    console.log(this.expenseList$);
+  ngOnInit(): void {
+    this.expenses$.subscribe(data => {
+      this.dataSource.data = data['expenses'];
+    });
   }
 }

@@ -3,7 +3,6 @@ import { MatDialog } from "@angular/material/dialog";
 
 import { ExpenseTrackerDialogComponent } from "./expense-tracker-dialog/expense-tracker-dialog.component";
 
-
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -15,13 +14,8 @@ export class AppComponent {
   constructor(public dialog: MatDialog) {}
 
   openExpenseTrackerDialog(): void {
-    const dialogRef = this.dialog.open(ExpenseTrackerDialogComponent, {
-      width: "675px",
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+    this.dialog.open(ExpenseTrackerDialogComponent, {
+      width: "675px"
     });
   }
 }
