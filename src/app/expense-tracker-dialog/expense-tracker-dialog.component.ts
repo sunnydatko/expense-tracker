@@ -34,12 +34,10 @@ export class ExpenseTrackerDialogComponent implements OnInit {
   }
 
   getTotal() {
-    let value = (
+    return (
       this.expenseForm.controls["cost"].value *
       this.expenseForm.controls["quantity"].value
-    ).toFixed(2);
-
-    return Number(value).toLocaleString();
+    ).toLocaleString(undefined, { minimumFractionDigits: 2 });
   }
 
   onCancel(): void {

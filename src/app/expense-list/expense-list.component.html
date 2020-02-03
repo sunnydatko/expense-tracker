@@ -1,4 +1,5 @@
 <div *ngIf="expenses$ | async">
+  <div *ngIf="dataSource.data.length">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="quantity">
         <th mat-header-cell *matHeaderCellDef>Quantity</th>
@@ -7,7 +8,11 @@
 
       <ng-container matColumnDef="cost">
         <th mat-header-cell *matHeaderCellDef>Cost</th>
-        <td mat-cell *matCellDef="let element">{{ element.cost }}</td>
+        <td mat-cell *matCellDef="let element">
+          ${{
+            element.cost.toLocaleString(undefined, { minimumFractionDigits: 2 })
+          }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="description">
@@ -17,10 +22,17 @@
 
       <ng-container matColumnDef="total">
         <th mat-header-cell *matHeaderCellDef>Total</th>
-        <td mat-cell *matCellDef="let element">{{ element.quantity * element.cost }}</td>
+        <td mat-cell *matCellDef="let element">
+          ${{
+            (element.quantity * element.cost).toLocaleString(undefined, {
+              minimumFractionDigits: 2
+            })
+          }}
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+  </div>
 </div>
