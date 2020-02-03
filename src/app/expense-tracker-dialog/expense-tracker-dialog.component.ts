@@ -55,7 +55,7 @@ export class ExpenseTrackerDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onValidateNumeric(event): boolean {
+  onValidateNumericWithDecimal(event): boolean {
     if (event.keyCode == 46) {
       return true;
     }

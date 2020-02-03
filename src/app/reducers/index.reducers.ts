@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { addExpense } from '../actions/expense-tracker.actions';
 
+import { addExpense } from '../actions/expense-tracker.actions';
 import { ExpenseData } from "../interfaces/expense.interface";
 
 export interface State {
